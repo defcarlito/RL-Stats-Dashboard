@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, Text, VStack } from "@chakra-ui/react"
+import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge } from "@chakra-ui/react"
 import MoreInfo from "./info/MoreInfo"
 
 function Match(){
@@ -8,11 +8,19 @@ function Match(){
             overflow={"hidden"}>
             <VStack gap={0} w={"100%"}>
                 <HStack gap={4} alignSelf={"flex-start"}>
-                    <Heading size={"lg"} color={"green.300"}>W</Heading>
+                    <Heading size={"3xl"} color={"green.300"}>W</Heading>
                     <Text size={"lg"}>8 - 4</Text>
                 </HStack>
                 <HStack alignSelf={"flex-end"}>
-                    <Text>+9 MMR</Text>
+                    <Stat.Root>
+                        <Stat.Label>MMR</Stat.Label>
+                        <Stat.ValueText>
+                            <FormatNumber value={1023}></FormatNumber>
+                        </Stat.ValueText>
+                        <Badge colorPalette={"green"} variant={"plain"} px={0} gap={0}>
+                            <Stat.UpIndicator/>9
+                        </Badge>
+                    </Stat.Root>
                 </HStack>
                 <VStack w={"100%"}>
                     <Text>vs. PlaceHolder</Text>

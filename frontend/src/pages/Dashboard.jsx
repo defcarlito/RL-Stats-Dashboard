@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "../components/nav/Navbar";
 import CurrentStats from "../components/content-left/CurrentStats";
-import Logs from "../components/content-main/Logs";
+import Log from "../components/content-main/Log";
 
 function Dashboard() {
     const centered = {
@@ -17,7 +17,7 @@ function Dashboard() {
                     <CurrentStats />
                 </GridItem>
                 <GridItem border={"1px solid red"}>
-                    <Logs />
+                    <Log />
                 </GridItem>
                 <GridItem {...centered} border={"1px solid red"}>
 
