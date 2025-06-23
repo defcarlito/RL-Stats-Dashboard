@@ -7,15 +7,12 @@ import { db } from "../Firebase";
 
 function Log() {
 
-    const [allMatches, setAllMatches] = useState([])
+    const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
     useEffect(() => {
-        const q = query(collection(db, "matches"))
-        const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-            const matchesArr = [];
-            QuerySnapshot.forEach((doc) => {
-                matchesArr.push({id: doc.id, ...doc.data() })
-            })
-            setAllMatches(matchesArr)
+        const matchesRef = collection(db, "matches", "by_date", "2025-06-22")
+        const unsubscribe = onSnapshot(matchesRef, (snapshot) => {
+            const matches = snapshot.docs.map(doc => doc.data())
+            setAllMatchesOnDate(matches)
         })
         return () => unsubscribe()
     }, [])
@@ -23,7 +20,7 @@ function Log() {
     const filterMenu = (
         <Menu.Root positioning={{ placement: "right-start" }}>
             <Menu.Trigger asChild>
-                <Button variant={"outline"} size={"sm"} fontSize={"sm"}>
+                <Button variant={"plain"} size={"sm"} fontSize={"sm"} color={"white"}>
                     <GiHamburgerMenu />Filter by Playlist
                 </Button>
             </Menu.Trigger>
@@ -45,8 +42,8 @@ function Log() {
                 {filterMenu}
             </HStack>
             <Flex direction={"column"} w={"100%"} gap={4}>
-                {allMatches.map((matchStats) => (
-                    <Match matchStats={matchStats}/>
+                {allMatchesOnDate.map((matchStats) => (
+                    <Match key={matchStats.StartEpoch} matchStats={matchStats}/>
                 ))}
             </Flex>
         </VStack>
