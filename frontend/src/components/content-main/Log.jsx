@@ -1,22 +1,26 @@
-import { Flex, Heading, HStack, VStack, Menu, Button, Portal, Box } from "@chakra-ui/react"
+import { Flex, Heading, HStack, VStack, Menu, Button, Portal, Text } from "@chakra-ui/react"
 import { GiHamburgerMenu } from "react-icons/gi";
 import Match from "./match/Match"
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, QuerySnapshot } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../Firebase";
 
 function Log() {
 
+    let date = "2025-06-22"
+
     const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
     useEffect(() => {
-        const matchesRef = collection(db, "matches", "by_date", "2025-06-22")
-        const unsubscribe = onSnapshot(matchesRef, (snapshot) => {
-            const matches = snapshot.docs.map(doc => doc.data())
-            setAllMatchesOnDate(matches)
-        })
-        return () => unsubscribe()
-    }, [])
+    const fetchMatches = async () => {
+        const matchesRef = collection(db, "matches", "by_date", date);
+        const q = query(matchesRef, orderBy("StartEpoch", "desc"));
+        const snapshot = await getDocs(q);
+        const matches = snapshot.docs.map(doc => doc.data());
+        setAllMatchesOnDate(matches);
+  }
 
+  fetchMatches();
+}, []);
     const filterMenu = (
         <Menu.Root positioning={{ placement: "right-start" }}>
             <Menu.Trigger asChild>
@@ -38,8 +42,9 @@ function Log() {
     return (
         <VStack w={"100%"} px={8} gap={2} py={4}>
             <Heading size={"md"}>Match Logs</Heading>
-            <HStack alignSelf={"start"}>
+            <HStack w={"100%"} alignSelf={"center"} justifyContent={"space-between"}>
                 {filterMenu}
+                <Text color={"gray.700"}>Viewing: {date}</Text>
             </HStack>
             <Flex direction={"column"} w={"100%"} gap={4}>
                 {allMatchesOnDate.map((matchStats) => (

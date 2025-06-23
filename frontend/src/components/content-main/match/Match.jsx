@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge } from "@chakra-ui/react"
+import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex } from "@chakra-ui/react"
 import MoreInfo from "./info/MoreInfo"
 
 function hasLocalPlayerWon(stats, localTeam, opponentTeam){
@@ -50,40 +50,44 @@ function Match({ matchStats }){
 
     const forfeitBadge = (
         <Badge colorPalette={resultColor} variant={"subtle"} position={"absolute"}
-        bottom={-6}>by Forfeit</Badge>
+        bottom={-6} alignSelf={"flex-start"}>by Forfeit</Badge>
+    )
+
+    const mmrStats = (
+        <Stat.Root>
+            <Stat.Label>MMR</Stat.Label>
+            <Stat.ValueText>
+                <FormatNumber value={mmrAfter}></FormatNumber>
+                <Badge colorPalette={indicatorColor} variant={"plain"} size={"md"} px={0} gap={0}>
+                    {indicator} {mmrDifference !== 0 && Math.abs(mmrDifference)}
+                </Badge>
+            </Stat.ValueText>
+            <Stat.HelpText>Prev: {mmrBefore}</Stat.HelpText>
+        </Stat.Root>
     )
 
     return (
         <Box border={"1px solid"} borderColor={"gray.700"} color={"white"} p={4} 
             w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"}
             overflow={"hidden"}>
-            <VStack gap={2} w={"100%"}>
+            <VStack gap={8} w={"100%"}>
                 <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"}>
                     <VStack position={"relative"}>
                         <HStack gap={4}>
-                            <Heading size={"3xl"} color={`${resultColor}.300`}>{resultSymbol}</Heading>
+                            <Heading size={"4xl"} color={`${resultColor}.300`}>{resultSymbol}</Heading>
                             <Text size={"lg"}>{score}</Text>
                         </HStack>
                         {matchStats.bForfeit === 1 && forfeitBadge}
                     </VStack>
-                    <Text color={"gray.700"}>{time()}</Text>
+                    <Text color={"white"}>{time()}</Text>
                 </HStack>
-                <HStack alignSelf={"flex-end"}>
-                    <Stat.Root>
-                        <Stat.Label>MMR</Stat.Label>
-                        <Stat.ValueText>
-                            <FormatNumber value={mmrAfter}></FormatNumber>
-                            <Badge colorPalette={indicatorColor} variant={"plain"} size={"md"} px={0} gap={0}>
-                                {indicator} {mmrDifference !== 0 ? Math.abs(mmrDifference) : "-"}
-                            </Badge>
-                        </Stat.ValueText>
-                        <Stat.HelpText>Prev: {mmrBefore}</Stat.HelpText>
-                    </Stat.Root>
-                </HStack>
+                <Flex w={"100%"} align={"center"} position={"relative"}>
+                    <Heading mx={"auto"}>vs. {opponent}</Heading>
+                    <Box position={"absolute"} right={0} size={"sm"}>{mmrStats}</Box>
+                </Flex>
                 <VStack w={"100%"}>
-                    <Text>vs. {opponent}</Text>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"}>
-                        <MoreInfo />
+                        <MoreInfo matchStats={matchStats} />
                     </HStack>
                 </VStack>
             </VStack>
