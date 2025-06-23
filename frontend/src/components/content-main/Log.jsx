@@ -1,8 +1,24 @@
-import { Flex, Heading, HStack, VStack, Menu, Button, Portal } from "@chakra-ui/react"
+import { Flex, Heading, HStack, VStack, Menu, Button, Portal, Box } from "@chakra-ui/react"
 import { GiHamburgerMenu } from "react-icons/gi";
 import Match from "./match/Match"
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, query, QuerySnapshot } from "firebase/firestore";
+import { db } from "../Firebase";
 
 function Log() {
+
+    const [allMatches, setAllMatches] = useState([])
+    useEffect(() => {
+        const q = query(collection(db, "matches"))
+        const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+            const matchesArr = [];
+            QuerySnapshot.forEach((doc) => {
+                matchesArr.push({id: doc.id, ...doc.data() })
+            })
+            setAllMatches(matchesArr)
+        })
+        return () => unsubscribe()
+    }, [])
 
     const filterMenu = (
         <Menu.Root positioning={{ placement: "right-start" }}>
@@ -29,15 +45,9 @@ function Log() {
                 {filterMenu}
             </HStack>
             <Flex direction={"column"} w={"100%"} gap={4}>
-                <Match />
-                <Match />
-                <Match />
-                <Match />
-                <Match />
-                <Match />
-                <Match />
-                <Match />
-                <Match />
+                {allMatches.map((matchStats) => (
+                    <Match matchStats={matchStats}/>
+                ))}
             </Flex>
         </VStack>
     )
