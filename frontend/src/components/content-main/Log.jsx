@@ -7,7 +7,7 @@ import { db } from "../Firebase";
 
 function Log() {
 
-    let date = "2025-06-22"
+    let date = "2025-06-23"
 
     const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
     useEffect(() => {
