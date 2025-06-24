@@ -1,5 +1,5 @@
 import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex } from "@chakra-ui/react"
-import MoreInfo from "./collapsible/MatchCollapsible"
+import MatchCollapsible from "./collapsible/MatchCollapsible"
 
 function hasLocalPlayerWon(stats, localTeam, opponentTeam){
     let winner = -1
@@ -99,7 +99,7 @@ function Match({ matchStats }){
                 </Flex>
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
-                        <MoreInfo matchStats={matchStats} />
+                        <MatchCollapsible matchStats={matchStats} />
                         <Text color="gray.700" position={"absolute"} right={0} top={0}>{matchPlaylist}</Text>
                     </HStack>
                 </VStack>

@@ -37,8 +37,8 @@ function Log() {
     return (
         <VStack w={"100%"} px={8} gap={2} py={4}>
             <Heading size={"lg"}>Match Logs</Heading>
-            <Box w={"100%"}>
-                <DateSelector />
+            <Box>
+                <DateSelector dates={dates} setSelectedDate={setSelectedDate} />
             </Box>
             <HStack w={"100%"} alignSelf={"center"} justifyContent={"space-between"}>
                 <Box>

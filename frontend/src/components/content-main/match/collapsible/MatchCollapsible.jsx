@@ -3,7 +3,7 @@ import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
 import GoalClip from "./GoalClip"
 
-function MoreInfo({ matchStats }) {
+function MatchCollapsible({ matchStats }) {
     const [isOpen, setIsOpen] = useState(false)
     const icon = isOpen ? <SlArrowDown/> : <SlArrowRight/>
 
@@ -26,7 +26,7 @@ function MoreInfo({ matchStats }) {
             <Collapsible.Content>
                 <Box>
                     {getLocalPlayerGoals().map((goal) => (
-                        <GoalClip/>
+                        <GoalClip key={goal.GoalTimeSeconds}/>
                     ))}
                 </Box>
             </Collapsible.Content>
@@ -34,4 +34,4 @@ function MoreInfo({ matchStats }) {
     )
 }
 
-export default MoreInfo
+export default MatchCollapsible
