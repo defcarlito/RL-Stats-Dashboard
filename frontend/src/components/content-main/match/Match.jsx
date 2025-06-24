@@ -1,5 +1,5 @@
 import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex } from "@chakra-ui/react"
-import MoreInfo from "./info/MoreInfo"
+import MoreInfo from "./collapsible/MatchCollapsible"
 
 function hasLocalPlayerWon(stats, localTeam, opponentTeam){
     let winner = -1
@@ -24,7 +24,12 @@ function Match({ matchStats }){
     ? ["red", <Stat.DownIndicator />]
     : ["gray", null]
     
-    const localPlayerTeam = matchStats.MatchPlayerInfo[0].Team
+    
+    const localPlayer = matchStats.MatchPlayerInfo.find(
+        playerInfo => playerInfo.Name === "BrickBoned"
+    )
+
+    const localPlayerTeam = localPlayer.Team
     const opponentTeam = localPlayerTeam === 0 ? 1 : 0
 
     const isLocalPlayerWinner = hasLocalPlayerWon(matchStats, localPlayerTeam, opponentTeam)

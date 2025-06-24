@@ -1,11 +1,10 @@
 import { Flex, Heading, HStack, VStack, Menu, Button, Portal, Text, Box } from "@chakra-ui/react"
-import { ButtonGroup, IconButton, Pagination } from "@chakra-ui/react"
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi"
-import { GiHamburgerMenu } from "react-icons/gi";
 import Match from "./match/Match"
 import { useEffect, useState } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../Firebase";
+import DateSelector from "./filter/DateSelector";
+import FilterPlaylistMenu from "./filter/FilterPlaylistMenu";
 
 function Log() {
 
@@ -16,6 +15,7 @@ function Log() {
 
     const [selectedDate, setSelectedDate] = useState(0)
     let date = dates[selectedDate]
+    
     const formattedDate = () => {
         const parts = date.split("-")
         return parts[1] + "/" + parts[2] + "/" + parts[0]
@@ -34,51 +34,15 @@ function Log() {
         fetchMatches()
     }, [selectedDate])
 
-    const filterPlaylistMenu = (
-        <Menu.Root>
-            <Menu.Trigger asChild>
-                <Button variant={"plain"} size={"sm"} fontSize={"sm"} color={"white"}>
-                    <GiHamburgerMenu />Filter by Playlist
-                </Button>
-            </Menu.Trigger>
-            <Portal>
-                <Menu.Positioner>
-                    <Menu.Content>
-                        <Menu.Item>1v1</Menu.Item>
-                        <Menu.Item>2v2</Menu.Item>
-                    </Menu.Content>
-                </Menu.Positioner>
-            </Portal>
-        </Menu.Root>
-    )
-
-    const DateSelector = (
-        <Pagination.Root count={dates.length * 2} pageSize={2} defaultPage={1}>
-            <ButtonGroup gap="4" size="sm" variant="ghost">
-                <Pagination.PrevTrigger asChild>
-                    <IconButton onClick = {() => setSelectedDate(selectedDate-1)}>
-                        <HiChevronLeft color={"white"}/>
-                    </IconButton>
-                </Pagination.PrevTrigger>
-                <Pagination.PageText />
-                <Pagination.NextTrigger asChild>
-                    <IconButton onClick = {() => setSelectedDate(selectedDate+1)}>
-                        <HiChevronRight color={"white"}/>
-                    </IconButton>
-                </Pagination.NextTrigger>
-            </ButtonGroup>
-        </Pagination.Root>
-        )
-
     return (
         <VStack w={"100%"} px={8} gap={2} py={4}>
             <Heading size={"lg"}>Match Logs</Heading>
+            <Box w={"100%"}>
+                <DateSelector />
+            </Box>
             <HStack w={"100%"} alignSelf={"center"} justifyContent={"space-between"}>
                 <Box>
-                    {filterPlaylistMenu}
-                </Box>
-                <Box>
-                    {DateSelector}
+                    <FilterPlaylistMenu />
                 </Box>
                 <Box>
                     <Text color={"gray.700"}>Viewing: {formattedDate()}</Text>
