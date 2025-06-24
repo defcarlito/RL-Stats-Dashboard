@@ -15,4 +15,7 @@ todo:
     - update firebase db to store "opponent_history/"
     - will use to track performance against repeated opponents
 
+  3:
+    - fix opponent display to show all opponents for 2s games
+
     
