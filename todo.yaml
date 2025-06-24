@@ -1,0 +1,12 @@
+todo:
+  1:
+    - update firebase db to store "date_index/"
+    - ex:
+      - date_index/
+        {YYYY-MM-DD}: {matchCount: x, lastUpdated: {StartEpoch from last game}}
+        ...
+  2:
+    - update firebase db to store "opponent_history/"
+    - will use to track performance against repeated opponents
+
+    
