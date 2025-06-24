@@ -3,8 +3,14 @@ todo:
     - update firebase db to store "date_index/"
     - ex:
       - date_index/
-        {YYYY-MM-DD}: {matchCount: x, lastUpdated: {StartEpoch from last game}}
+        {YYYY-MM-DD}: {matchCount: x, lastUpdated: {StartEpoch from last game}
         ...
+      - maybe also store daily global stats for daily graphs like:
+        - total solo goals
+        - total team goals
+        - total goals conceded
+        - etc
+
   2:
     - update firebase db to store "opponent_history/"
     - will use to track performance against repeated opponents
