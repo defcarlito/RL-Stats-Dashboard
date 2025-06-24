@@ -1,6 +1,7 @@
 import { Box, Collapsible, Icon } from "@chakra-ui/react"
 import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
+import GoalClip from "./GoalClip"
 
 function MoreInfo({ matchStats }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -23,7 +24,11 @@ function MoreInfo({ matchStats }) {
                 <Icon>{icon}</Icon>
             </Collapsible.Trigger>
             <Collapsible.Content>
-                <Box>clips / scoreboard here</Box>
+                <Box>
+                    {getLocalPlayerGoals().map((goal) => (
+                        <GoalClip/>
+                    ))}
+                </Box>
             </Collapsible.Content>
         </Collapsible.Root>
     )

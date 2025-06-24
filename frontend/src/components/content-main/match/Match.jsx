@@ -31,6 +31,13 @@ function Match({ matchStats }){
     const resultColor = isLocalPlayerWinner ? "green" : "red"
     const resultSymbol = isLocalPlayerWinner ? "W" : "L"
 
+    const playlists = {
+        "10": "1v1",
+        "11": "2v2"
+    }
+    const matchPlaylist = playlists[matchStats.Playlist]
+
+
     const time = () => {
         const fullTime = matchStats.StartDate.split(" ")[1]
         const hour = parseInt(fullTime.split("-")[0])
@@ -86,8 +93,9 @@ function Match({ matchStats }){
                     <Box position={"absolute"} right={0} size={"sm"}>{mmrStats}</Box>
                 </Flex>
                 <VStack w={"100%"}>
-                    <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"}>
+                    <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
                         <MoreInfo matchStats={matchStats} />
+                        <Text color="gray.700" position={"absolute"} right={0} top={0}>{matchPlaylist}</Text>
                     </HStack>
                 </VStack>
             </VStack>
