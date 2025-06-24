@@ -1,4 +1,4 @@
-import { Box, Collapsible, Icon } from "@chakra-ui/react"
+import { Box, Collapsible, Flex, Icon, Tabs, TabsList } from "@chakra-ui/react"
 import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
 import GoalClip from "./GoalClip"
@@ -19,16 +19,14 @@ function MatchCollapsible({ matchStats }) {
     }
 
     return (
-        <Collapsible.Root open={isOpen} onClick={()=>{setIsOpen(!isOpen)}}>
-            <Collapsible.Trigger>
+        <Collapsible.Root open={isOpen} w={"full"}>
+            <Collapsible.Trigger onClick={()=>{setIsOpen(!isOpen)}}>
                 <Icon>{icon}</Icon>
             </Collapsible.Trigger>
             <Collapsible.Content>
-                <Box>
-                    {getLocalPlayerGoals().map((goal) => (
-                        <GoalClip key={goal.GoalTimeSeconds}/>
-                    ))}
-                </Box>
+                <Flex py={4} w={"full"} justifyContent={"center"}>    
+                    stats
+                </Flex>
             </Collapsible.Content>
         </Collapsible.Root>
     )
