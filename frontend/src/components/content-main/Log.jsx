@@ -8,28 +8,38 @@ import FilterPlaylistMenu from "./filter/FilterPlaylistMenu";
 
 function Log() {
 
-    const dates = [
-        "2025-06-23",
-        "2025-06-22"
-    ]
+    const [dates, setDates] = useState([])
 
-    const [selectedDate, setSelectedDate] = useState(0)
+    const [selectedDate, setSelectedDate] = useState("")
     const [selectedPlaylist, setSelectedPlaylist] = useState(10) // default = ranked 1v1
-
-    
-    let date = dates[selectedDate]
-    const formattedDate = () => {
-        const parts = date.split("-")
-        return parts[1] + "/" + parts[2] + "/" + parts[0]
-    }
 
     const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
 
+    function formatDate(date) {
+        const parts = date.split("-")
+        const year = parts[0]
+        const month = parseInt(parts[1])
+        const day = parseInt(parts[2])
+        return `${month}/${day}/${year}`
+    }
+    
+    useEffect(() => {
+        const fetchAvaliableDates = async () => {
+            const snapshot = await getDocs(collection(db, "match_dates"))
+            const fetchedDates = snapshot.docs.map(doc => doc.id)
+            const datesInOrder = fetchedDates.reverse()
+            setDates(datesInOrder)
+            fetchedDates.length > 0 && setSelectedDate(datesInOrder[0]) // set default
+        }
+        fetchAvaliableDates()
+    }, [])
+
     useEffect(() => {
         const fetchMatches = async () => {
-            const matchesRef = collection(db, "matches", "by_date", date)
+            const matchesRef = collection(db, "matches")
             const q = query(
                 matchesRef, 
+                where("StartDate", "==", selectedDate),
                 where("Playlist", "==", selectedPlaylist),
                 orderBy("StartEpoch", "desc")
             )
@@ -44,14 +54,15 @@ function Log() {
         <VStack w={"100%"} px={8} gap={2} py={4}>
             <Heading size={"lg"}>Match Logs</Heading>
             <Box>
-                <DateSelector dates={dates} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                <DateSelector dates={dates} selectedDate={selectedDate} 
+                setSelectedDate={setSelectedDate} formatDate={formatDate} />
             </Box>
             <HStack w={"100%"} alignSelf={"center"} justifyContent={"space-between"}>
                 <Box>
                     <FilterPlaylistMenu setSelectedPlaylist={setSelectedPlaylist} />
                 </Box>
                 <Box>
-                    <Text color={"gray.700"}>Viewing: {formattedDate()}</Text>
+                    <Text color={"gray.700"}>Viewing: {formatDate(selectedDate)}</Text>
                 </Box>
             </HStack>
             <Flex direction={"column"} w={"100%"} gap={4}>

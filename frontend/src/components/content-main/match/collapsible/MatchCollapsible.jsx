@@ -1,7 +1,7 @@
-import { Box, Collapsible, Flex, Icon, Tabs, TabsList } from "@chakra-ui/react"
+import { Box, Collapsible, Flex, Icon } from "@chakra-ui/react"
 import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
-import GoalClip from "./GoalClip"
+import Scoreboard from "./stats/Scoreboard"
 
 function MatchCollapsible({ matchStats }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +25,7 @@ function MatchCollapsible({ matchStats }) {
             </Collapsible.Trigger>
             <Collapsible.Content>
                 <Flex py={4} w={"full"} justifyContent={"center"}>    
-                    stats
+                    <Scoreboard matchStats={matchStats} />
                 </Flex>
             </Collapsible.Content>
         </Collapsible.Root>

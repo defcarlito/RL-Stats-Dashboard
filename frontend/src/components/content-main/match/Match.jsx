@@ -44,7 +44,7 @@ function Match({ matchStats }){
 
 
     const time = () => {
-        const fullTime = matchStats.StartDate.split(" ")[1]
+        const fullTime = matchStats.StartTime
         const hour = parseInt(fullTime.split("-")[0])
         const minute = fullTime.split("-")[1]
         const symbol = hour < 12 ? "AM" : "PM"

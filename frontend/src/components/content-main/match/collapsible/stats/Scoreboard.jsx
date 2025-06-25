@@ -1,4 +1,4 @@
-function Scoreboard() {
+function Scoreboard({ matchStats }) {
     return (
         <>scoreboard</>
     )
