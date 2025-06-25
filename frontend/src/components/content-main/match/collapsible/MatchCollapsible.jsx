@@ -3,7 +3,7 @@ import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
 import Scoreboard from "./stats/Scoreboard"
 
-function MatchCollapsible({ matchStats }) {
+function MatchCollapsible({ matchStats, localPlayerTeam }) {
     const [isOpen, setIsOpen] = useState(false)
     const icon = isOpen ? <SlArrowDown/> : <SlArrowRight/>
 
@@ -24,12 +24,16 @@ function MatchCollapsible({ matchStats }) {
                 <Icon>{icon}</Icon>
             </Collapsible.Trigger>
             <Collapsible.Content>
-                <Flex py={4} w={"full"} justifyContent={"center"}>    
-                    <Scoreboard matchStats={matchStats} />
-                </Flex>
+                <Box>
+                    <Flex w={"full"} alignItems={"center"} justifyContent={"center"} marginTop={4}>    
+                        <Scoreboard matchPlayerInfo={matchStats.MatchPlayerInfo} 
+                        localPlayerTeam={localPlayerTeam} />
+                    </Flex>
+                </Box>
             </Collapsible.Content>
         </Collapsible.Root>
     )
 }
 
 export default MatchCollapsible
+        

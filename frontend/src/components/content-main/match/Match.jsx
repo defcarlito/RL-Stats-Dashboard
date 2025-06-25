@@ -33,9 +33,7 @@ function Match({ matchStats }){
     const opponentsInfo = matchStats.MatchPlayerInfo.filter(
         player => player.Team === opponentTeam 
     )
-
     const opponentNames = opponentsInfo.map(player => player.Name).join(", ");
-
 
     const isLocalPlayerWinner = hasLocalPlayerWon(matchStats, localPlayerTeam, opponentTeam)
     const resultColor = isLocalPlayerWinner ? "green" : "red"
@@ -104,7 +102,7 @@ function Match({ matchStats }){
                 </Flex>
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
-                        <MatchCollapsible matchStats={matchStats} />
+                        <MatchCollapsible matchStats={matchStats} localPlayerTeam={localPlayerTeam} />
                         <Text color="gray.700" position={"absolute"} right={0} top={0}>{matchPlaylist}</Text>
                     </HStack>
                 </VStack>
