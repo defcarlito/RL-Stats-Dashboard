@@ -51,7 +51,7 @@ function Log() {
     }, [selectedDate, selectedPlaylist])
 
     return (
-        <VStack w={"100%"} px={8} gap={2} py={4}>
+        <VStack w={"100%"} minH={"100vh"} px={8} py={4} gap={2}>
             <Heading size={"lg"}>Match Logs</Heading>
             <Box>
                 <DateSelector dates={dates} selectedDate={selectedDate} 

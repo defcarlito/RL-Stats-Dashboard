@@ -12,10 +12,8 @@ function hasLocalPlayerWon(stats, localTeam, opponentTeam){
 }
 
 function Match({ matchStats }){
-    const opponent = matchStats.MatchPlayerInfo[1].Name
     const mmrBefore = matchStats.LocalMMRBefore
     const mmrAfter = matchStats.LocalMMRAfter 
-    
     const mmrDifference = mmrAfter - mmrBefore
     
     const [indicatorColor, indicator] = mmrDifference > 0
@@ -28,9 +26,16 @@ function Match({ matchStats }){
     const localPlayer = matchStats.MatchPlayerInfo.find(
         playerInfo => playerInfo.Name === "BrickBoned"
     )
-
+    
     const localPlayerTeam = localPlayer.Team
     const opponentTeam = localPlayerTeam === 0 ? 1 : 0
+
+    const opponentsInfo = matchStats.MatchPlayerInfo.filter(
+        player => player.Team === opponentTeam 
+    )
+
+    const opponentNames = opponentsInfo.map(player => player.Name).join(", ");
+
 
     const isLocalPlayerWinner = hasLocalPlayerWon(matchStats, localPlayerTeam, opponentTeam)
     const resultColor = isLocalPlayerWinner ? "green" : "red"
@@ -91,10 +96,10 @@ function Match({ matchStats }){
                         </HStack>
                         {matchStats.bForfeit === 1 && forfeitBadge}
                     </VStack>
-                    <Text color={"white"}>{time()}</Text>
+                    <Text color={"gray.700"}>{time()}</Text>
                 </HStack>
                 <Flex w={"100%"} align={"center"} position={"relative"}>
-                    <Heading mx={"auto"}>vs. {opponent}</Heading>
+                    <Heading mx={"auto"}>vs. {opponentNames}</Heading>
                     <Box position={"absolute"} right={0} size={"sm"}>{mmrStats}</Box>
                 </Flex>
                 <VStack w={"100%"}>

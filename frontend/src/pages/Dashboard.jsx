@@ -12,14 +12,14 @@ function Dashboard() {
     return (
         <Box bg={"gray.900"} color={"white"} minH={"100vh"}>
             <Navbar />
-            <Grid templateColumns={"1fr 2fr 1fr"} py={4}>
-                <GridItem {...centered} border={"1px solid red"}>
+            <Grid templateColumns={"1fr 2fr 1fr"}>
+                <GridItem {...centered}>
                     <CurrentStats />
                 </GridItem>
-                <GridItem border={"1px solid red"}>
+                <GridItem borderX={"1px solid"} borderColor={"gray.700"}>
                     <Log />
                 </GridItem>
-                <GridItem {...centered} border={"1px solid red"}>
+                <GridItem {...centered}>
 
                 </GridItem>
             </Grid>
