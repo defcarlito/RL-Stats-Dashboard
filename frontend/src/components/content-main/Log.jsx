@@ -1,4 +1,4 @@
-import { Flex, Heading, HStack, VStack, Text, Box } from "@chakra-ui/react"
+import { Flex, Heading, HStack, VStack, Text, Box, Presence } from "@chakra-ui/react"
 import Match from "./match/Match"
 import { useEffect, useState } from "react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
@@ -66,8 +66,12 @@ function Log() {
                 </Box>
             </HStack>
             <Flex direction={"column"} w={"100%"} gap={4}>
-                {allMatchesOnDate.map((matchStats) => (
-                    <Match key={matchStats.StartEpoch} matchStats={matchStats}/>
+                {allMatchesOnDate.map((matchStats, index) => (
+                    <Presence key={matchStats.StartEpoch} present={true}
+                    animationName={{ _open: "scale-in, fade-in, slide-from-bottom-full" }} animationDuration=".75s"
+                    style={{ animationDelay: `${index * 0.25}s`, animationFillMode: "both" }}>
+                        <Match key={matchStats.StartEpoch} matchStats={matchStats}/>
+                    </Presence>
                 ))}
             </Flex>
         </VStack>
