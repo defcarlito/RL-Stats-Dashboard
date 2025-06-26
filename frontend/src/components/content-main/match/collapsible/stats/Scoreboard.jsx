@@ -1,4 +1,4 @@
-import { Center, Table, Text } from "@chakra-ui/react"
+import { Center, Table } from "@chakra-ui/react"
 
 function Scoreboard({ matchPlayerInfo, localPlayerTeam }) {
     const opponentTeam = localPlayerTeam === 0 ? 1 : 0
