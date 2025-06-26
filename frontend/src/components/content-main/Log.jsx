@@ -62,7 +62,7 @@ function Log() {
                     <FilterPlaylistMenu setSelectedPlaylist={setSelectedPlaylist} />
                 </Box>
                 <Box>
-                    <Text color={"gray.700"}>{allMatchesOnDate.length} matches</Text>
+                    <Text color={"gray.700"}>{allMatchesOnDate.length} Matches</Text>
                 </Box>
             </HStack>
             <Flex direction={"column"} w={"full"} gap={4}>

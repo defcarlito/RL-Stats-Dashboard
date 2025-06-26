@@ -39,12 +39,6 @@ function Match({ matchStats }){
     const resultColor = isLocalPlayerWinner ? "green" : "red"
     const resultSymbol = isLocalPlayerWinner ? "W" : "L"
 
-    const playlists = {
-        "10": "1v1",
-        "11": "2v2"
-    }
-    const matchPlaylist = playlists[matchStats.Playlist]
-
 
     const time = () => {
         const fullTime = matchStats.StartTime
@@ -103,7 +97,6 @@ function Match({ matchStats }){
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
                         <MatchCollapsible matchStats={matchStats} localPlayerTeam={localPlayerTeam} />
-                        <Text color="gray.700" position={"absolute"} right={0} top={0}>{matchPlaylist}</Text>
                     </HStack>
                 </VStack>
             </VStack>
