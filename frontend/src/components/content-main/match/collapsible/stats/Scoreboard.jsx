@@ -1,4 +1,4 @@
-import { HStack, VStack, Box, Center, Button, Stack } from "@chakra-ui/react"
+import { Center, Table, Text } from "@chakra-ui/react"
 
 function Scoreboard({ matchPlayerInfo, localPlayerTeam }) {
     const opponentTeam = localPlayerTeam === 0 ? 1 : 0
@@ -9,33 +9,42 @@ function Scoreboard({ matchPlayerInfo, localPlayerTeam }) {
         if (a.Team !== b.Team) {
             return a.Team - b.Team;
         }
-        return a.Score - b.Score;
+        return b.Score - a.Score;
     })
 
     if (localPlayerTeam !== 0) sortedByLocalTeam.reverse()
 
     return (
         <Center w={"full"} border={"1px solid"} borderColor={"gray.700"}>
-            <VStack w={"full"} py={4}>
-                <HStack w={"full"} justifyContent={"space-between"}>
-                    <Box flex={1} textAlign={"left"}>Player</Box>
-                    <Box flex={1} textAlign={"center"}>Score</Box>
-                    <Box flex={1} textAlign={"center"}>Goals</Box>
-                    <Box flex={1} textAlign={"center"}>Assists</Box>
-                    <Box flex={1} textAlign={"center"}>Saves</Box>
-                    <Box flex={1} textAlign={"center"}>Shots</Box>
-                </HStack>
-                {sortedByLocalTeam.map((player) => (
-                <HStack w={"full"} justifyContent={"space-between"} color={teamColors[player.Team]}>
-                    <Box flex={1} textAlign={"left"} >{player.Name}</Box>
-                    <Box flex={1} textAlign={"center"}>{player.Score}</Box>
-                    <Box flex={1} textAlign={"center"}>{player.Goals}</Box>
-                    <Box flex={1} textAlign={"center"}>{player.Assists}</Box>
-                    <Box flex={1} textAlign={"center"}>{player.Saves}</Box>
-                    <Box flex={1} textAlign={"center"}>{player.Shots}</Box>
-                </HStack>
-                ))}
-            </VStack>
+            <Table.Root>
+                <Table.Header>
+                    <Table.Row bg={"transparent"}>
+                        <Table.ColumnHeader textAlign={"center"}>Player</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"}>Score</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"}>Goals</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"}>Assists</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"}>Saves</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"}>Shots</Table.ColumnHeader>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {sortedByLocalTeam.map((player, index) => (
+                        <Table.Row key={index} bg={
+                            player.Name === "BrickBoned"
+                                ? `${teamColors[player.Team]}/50`
+                                : `${teamColors[player.Team]}/25`
+                            }
+                            >
+                            <Table.Cell textAlign={"center"}>{player.Name}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{player.Score}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{player.Goals}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{player.Assists}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{player.Saves}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{player.Shots}</Table.Cell>
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table.Root>
         </Center>
     )
 }
