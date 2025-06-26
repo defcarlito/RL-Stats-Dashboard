@@ -52,7 +52,7 @@ function Log() {
 
     return (
         <VStack w={"100%"} minH={"100vh"} px={8} py={4} gap={2}>
-            <Heading size={"lg"}>Match Logs</Heading>
+            <Heading size={"4xl"}>Match Logs</Heading>
             <Box>
                 <DateSelector dates={dates} selectedDate={selectedDate} 
                 setSelectedDate={setSelectedDate} formatDate={formatDate} />
@@ -62,10 +62,10 @@ function Log() {
                     <FilterPlaylistMenu setSelectedPlaylist={setSelectedPlaylist} />
                 </Box>
                 <Box>
-                    <Text color={"gray.700"}>Viewing: {formatDate(selectedDate)}</Text>
+                    <Text color={"gray.700"}>{allMatchesOnDate.length} matches</Text>
                 </Box>
             </HStack>
-            <Flex direction={"column"} w={"100%"} gap={4}>
+            <Flex direction={"column"} w={"full"} gap={4}>
                 {allMatchesOnDate.map((matchStats, index) => (
                     <Presence key={matchStats.StartEpoch} present={true}
                     animationName={{ _open: "scale-in, fade-in, slide-from-bottom-full" }} animationDuration=".75s"
