@@ -12,23 +12,12 @@ function Dashboard() {
         display: "flex",
         justifyContent: "center"
     }
-    
+
     const [dates, setDates] = useState([])
     const [selectedDate, setSelectedDate] = useState("")
     const [selectedPlaylist, setSelectedPlaylist] = useState(10) // default = ranked 1v1
     const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
-
-    useEffect(() => {
-        const fetchAvaliableDates = async () => {
-            const snapshot = await getDocs(collection(db, "match_dates"))
-            const fetchedDates = snapshot.docs.map(doc => doc.id)
-            const datesInOrder = fetchedDates.reverse()
-            setDates(datesInOrder)
-            fetchedDates.length > 0 && setSelectedDate(datesInOrder[0]) // set default
-        }
-        fetchAvaliableDates()
-    }, [])
-
+    
     useEffect(() => {
         const fetchMatches = async () => {
             const matchesRef = collection(db, "matches")
@@ -45,12 +34,24 @@ function Dashboard() {
         fetchMatches()
     }, [selectedDate, selectedPlaylist])
     
+    useEffect(() => {
+        const fetchAvaliableDates = async () => {
+            const snapshot = await getDocs(collection(db, "match_dates"))
+            const fetchedDates = snapshot.docs.map(doc => doc.id)
+            const datesInOrder = fetchedDates.reverse()
+            setDates(datesInOrder)
+            fetchedDates.length > 0 && setSelectedDate(datesInOrder[0]) // set default
+        }
+        fetchAvaliableDates()
+    }, [])
+
+    
     return (
         <Box bg={"gray.900"} color={"white"} minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
                 <GridItem {...centered}>
-                    <CurrentStats />
+                    <CurrentStats dates={dates}/>
                 </GridItem>
                 <GridItem borderX={"1px solid"} borderColor={"gray.700"}>
                     <Log 
