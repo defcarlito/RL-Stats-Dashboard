@@ -96,7 +96,7 @@ function Match({ matchStats }){
                 </Flex>
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
-                        <MatchCollapsible matchStats={matchStats} localPlayerTeam={localPlayerTeam} />
+                        <MatchCollapsible matchStats={matchStats} />
                     </HStack>
                 </VStack>
             </VStack>

@@ -8,24 +8,30 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
 
     const recent_three_dates = dates.slice(0, 3)
 
+    const [selected, setSelected] = useState()
+    useEffect(() => {
+        if (!selected) return
+        const formatted = selected.toISOString().split("T")[0]
+        setSelectedDate(formatted)
+    }, [selected])
+
     const availableDates = dates.map((d) => {
         const [y, m, day] = d.split("-")
         return new Date(y, m - 1, day)
-    });
+    })
 
-    const isSameDay = (a, b) =>
+    const isSameDay = (a, b) => (
         a.getDate() === b.getDate() &&
         a.getMonth() === b.getMonth() &&
         a.getFullYear() === b.getFullYear()
+    )
 
-    const [selected, setSelected] = useState()
+    const todayStr = new Date().toISOString().split('T')[0]
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+    const yesterdayStr = yesterday.toISOString().split("T")[0]
 
-    useEffect(() => {
-        if (!selected) return
-        const formatted = selected.toISOString().split("T")[0];
-        console.log(formatted)
-        setSelectedDate(formatted)
-    }, [selected])
+    
 
     return (
         <HStack p={4}>
@@ -34,7 +40,13 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
                     onClick={() => setSelectedDate(date)} fontSize={"lg"}
                     color={ selectedDate === date ? "gray.400" : "gray.700"}
                     _hover={{ color: selectedDate !== date ? "gray.500" : undefined }}>
-                        {formatDate(date)}
+                        {date === todayStr ? 
+                            "Today" : 
+                            (date === yesterdayStr ? 
+                                "Yesterday" : 
+                                formatDate(date)
+                            )
+                        }
                     </Button>
             ))}
             <Popover.Root>
@@ -43,7 +55,7 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
                         View more
                 </Popover.Trigger>
                 <Popover.Positioner>
-                    <Popover.Content>
+                    <Popover.Content css={{ "--popover-bg": "#18181b" }}>
                     <Popover.CloseTrigger />
                     <Popover.Arrow>
                         <Popover.ArrowTip />

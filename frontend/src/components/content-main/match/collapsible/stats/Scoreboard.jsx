@@ -1,18 +1,15 @@
 import { Center, Table } from "@chakra-ui/react"
 
-function Scoreboard({ matchPlayerInfo, localPlayerTeam }) {
-    const opponentTeam = localPlayerTeam === 0 ? 1 : 0
-
+function Scoreboard({ matchPlayerInfo }) {
     const teamColors = {0: "blue.500", 1: "orange.400"}
 
+    
     let sortedByLocalTeam = [...matchPlayerInfo].sort((a, b) => { 
         if (a.Team !== b.Team) {
             return a.Team - b.Team;
         }
         return b.Score - a.Score;
     })
-
-    if (localPlayerTeam !== 0) sortedByLocalTeam.reverse()
 
     return (
         <Center w={"full"} border={"1px solid"} borderColor={"gray.700"}>
