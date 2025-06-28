@@ -84,7 +84,7 @@ function Match({ matchStats }){
                     <VStack position={"relative"}>
                         <HStack gap={4}>
                             <Heading size={"4xl"} color={`${resultColor}.300`}>{resultSymbol}</Heading>
-                            <Text size={"lg"}>{score}</Text>
+                            <Text textStyle={"lg"}>{score}</Text>
                         </HStack>
                         {matchStats.bForfeit === 1 && forfeitBadge}
                     </VStack>
@@ -97,6 +97,9 @@ function Match({ matchStats }){
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
                         <MatchCollapsible matchStats={matchStats} />
+                        <Text color={"gray.700"} textStyle={"xs"} position={"absolute"} top={3} right={0}>
+                            {matchStats.Playlist === 10 ? "1v1" : "2v2"}
+                        </Text>
                     </HStack>
                 </VStack>
             </VStack>

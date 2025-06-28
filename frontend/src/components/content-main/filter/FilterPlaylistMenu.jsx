@@ -11,7 +11,7 @@ function FilterPlaylistMenu({ setSelectedPlaylist }){
         <Menu.Root>
             <Menu.Trigger asChild>
                 <Button variant={"plain"} size={"sm"} fontSize={"sm"} color={"white"}>
-                    <GiHamburgerMenu />Filter by Playlist <MdKeyboardArrowRight /> <u>{formatPlaylist}</u>
+                    <GiHamburgerMenu />Filter <MdKeyboardArrowRight /> <u>{formatPlaylist}</u>
                 </Button>
             </Menu.Trigger>
             <Portal>
