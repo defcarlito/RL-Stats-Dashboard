@@ -26,10 +26,15 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
         a.getFullYear() === b.getFullYear()
     )
 
-    const todayStr = new Date().toISOString().split('T')[0]
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const todayStr = today.toLocaleDateString('en-CA')
+
     const yesterday = new Date()
+    yesterday.setHours(0, 0, 0, 0)
     yesterday.setDate(yesterday.getDate() - 1)
-    const yesterdayStr = yesterday.toISOString().split("T")[0]
+    const yesterdayStr = yesterday.toLocaleDateString('en-CA')
 
     
 
