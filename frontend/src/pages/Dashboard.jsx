@@ -18,8 +18,6 @@ function Dashboard() {
     const [selectedPlaylist, setSelectedPlaylist] = useState(10) // default = ranked 1v1
     const [allMatchesOnDate, setAllMatchesOnDate] = useState([])
 
-    const [lastPlayedMatches, setlastPlayedMatches] = useState([])
-
     useEffect(() => {
         const fetchMatches = async () => {
             const matchesRef = collection(db, "matches")
@@ -47,25 +45,13 @@ function Dashboard() {
         fetchAvaliableDates()
     }, [])
 
-    useEffect(() => {
-        const fetchLastMatches = async () => {
-            const snapshot = await getDocs(collection(db, "latest_stats_by_playlist"))
-            const fetchMatches = snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data()
-            }))
-            setlastPlayedMatches(fetchMatches)
-        }
-        fetchLastMatches()
-    }, [])
-
     
     return (
         <Box bg={"gray.900"} color={"white"} minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
                 <GridItem {...centered}>
-                    <CurrentStats dates={dates} lastPlayedMatches={lastPlayedMatches} />
+                    <CurrentStats dates={dates} />
                 </GridItem>
                 <GridItem borderX={"1px solid"} borderColor={"gray.700"}>
                     <Log 
