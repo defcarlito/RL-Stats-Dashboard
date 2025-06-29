@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Image, Text, VStack } from "@chakra-ui/react"
+import { Box, Flex, Heading, HStack, Image, Presence, Text, VStack } from "@chakra-ui/react"
 import { Tooltip } from "../ui/tooltip"
 import { useEffect, useState, useMemo } from "react"
 import { db } from "../Firebase";
@@ -112,25 +112,37 @@ function CurrentStats({ dates }) {
     if (!dates || dates.length === 0) return null
 
     return (
-        <VStack position={"sticky"} top={"5rem"} alignSelf={"start"} p={4}>
-            <Box>
-                <HStack>
-                    <Image bg="transparent" height="50px" src="epic-games-logo.svg" />
-                    <Heading size={"4xl"}>BrickBoned</Heading>
-                </HStack>
-                <Text color={"gray.500"}>Last played {lastPlayedText}</Text>
-            </Box>
-            <HStack>
-                <Tooltip showArrow content={onesRankLogo.replace("-", " ")}
-                openDelay={200} closeDelay={100}>
-                    <Image src={`ranked-icons/${onesRankLogo}.png`} alt="1s rank" height={"150px"} />
-                </Tooltip>
-                <Tooltip showArrow content={twosRankLogo.replace("-", " ")}
-                openDelay={200} closeDelay={100}>
-                    <Image src={`ranked-icons/${twosRankLogo}.png`} alt="2s rank" height={"150px"} />
-                </Tooltip>
-            </HStack>
-        </VStack>
+        <Presence present={true} animationName={{ _open: "fade-in"}}
+        animationDuration=".5s">
+            <VStack position={"sticky"} top={"30%"} alignSelf={"start"} gap={10}>
+                <Box>
+                    <HStack>
+                        <Image bg="transparent" height="50px" src="epic-games-logo.svg" />
+                        <Heading size={"4xl"}>BrickBoned</Heading>
+                    </HStack>
+                    <Text color={"gray.500"}>Last played {lastPlayedText}</Text>
+                </Box>
+                <VStack p={4} border={"1px solid"} borderColor={"gray.700"}>
+                    <Text fontSize={"xl"} color={"gray.700"}>Current rankings</Text>
+                    <HStack>
+                        <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
+                            <Tooltip showArrow content={onesRankLogo.replace("-", " ")}
+                            openDelay={200} closeDelay={100}>
+                                <Image src={`ranked-icons/${onesRankLogo}.png`} alt="1s rank" height={"150px"} />
+                            </Tooltip>
+                            <Text color={"gray.700"}>1v1</Text>
+                        </Flex>
+                        <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
+                            <Tooltip showArrow content={twosRankLogo.replace("-", " ")}
+                            openDelay={200} closeDelay={100}>
+                                <Image src={`ranked-icons/${twosRankLogo}.png`} alt="2s rank" height={"150px"} />
+                            </Tooltip>
+                            <Text color={"gray.700"}>2v2</Text>
+                        </Flex>
+                    </HStack>
+                </VStack>
+            </VStack>
+        </Presence>
     )
 }
 
