@@ -1,4 +1,4 @@
-import { Button, Popover, HStack } from "@chakra-ui/react";
+import { Button, Popover, HStack, Box } from "@chakra-ui/react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "../../../styles/datepicker.css";
@@ -39,7 +39,7 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
     
 
     return (
-        <HStack p={4}>
+        <HStack p={4} border={"1px solid"} borderColor={"gray.700"} alignContent={"center"} justifyContent={"center"} my={4}>
             {recent_three_dates.map((date, index) => (
                     <Button size={"sm"} variant={"plain"} key={index} 
                     onClick={() => setSelectedDate(date)} fontSize={"lg"}
@@ -54,36 +54,38 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
                         }
                     </Button>
             ))}
-            <Popover.Root>
-                <Popover.Trigger size={"sm"} color={"blue.200"} variant={"plain"}
-                    _hover={{ color: "blue.500", cursor: "pointer" }}>
-                        View more
-                </Popover.Trigger>
-                <Popover.Positioner>
-                    <Popover.Content css={{ "--popover-bg": "#18181b" }}>
-                    <Popover.CloseTrigger />
-                    <Popover.Arrow>
-                        <Popover.ArrowTip />
-                    </Popover.Arrow> 
-                    <Popover.Body>
-                        <DayPicker
-                            animate
-                            mode="single"
-                            navLayout="around"
-                            selected={selected}
-                            onSelect={setSelected}
-                            modifiers={{ available: availableDates }}
-                            modifiersStyles={{
-                                available: {
+                <Popover.Root>
+                    <Popover.Trigger asChild>
+                        <Button size={"sm"} fontSize={"lg"} variant={"plain"} color={"blue.200/50"}
+                        _hover={{ color: "blue.200" }}>
+                            More
+                        </Button>
+                    </Popover.Trigger>
+                    <Popover.Positioner>
+                        <Popover.Content css={{ "--popover-bg": "#18181b" }}>
+                        <Popover.CloseTrigger />
+                        <Popover.Arrow>
+                            <Popover.ArrowTip />
+                        </Popover.Arrow> 
+                        <Popover.Body>
+                            <DayPicker
+                                animate
+                                mode="single"
+                                navLayout="around"
+                                selected={selected}
+                                onSelect={setSelected}
+                                modifiers={{ available: availableDates }}
+                                modifiersStyles={{
+                                    available: {
 
-                                },
-                            }}
-                            disabled={(day) => !availableDates.some(d => isSameDay(d, day))}
-                        />
-                    </Popover.Body>
-                    </Popover.Content>
-                </Popover.Positioner>
-            </Popover.Root>
+                                    },
+                                }}
+                                disabled={(day) => !availableDates.some(d => isSameDay(d, day))}
+                            />
+                        </Popover.Body>
+                        </Popover.Content>
+                    </Popover.Positioner>
+                </Popover.Root>
         </HStack>
     )
 }

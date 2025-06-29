@@ -130,14 +130,14 @@ function CurrentStats({ dates }) {
                             openDelay={200} closeDelay={100}>
                                 <Image src={`ranked-icons/${onesRankLogo}.png`} alt="1s rank" height={"150px"} />
                             </Tooltip>
-                            <Text color={"gray.700"}>1v1</Text>
+                            <Text color={"gray.700"}>Duel 1v1</Text>
                         </Flex>
                         <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
                             <Tooltip showArrow content={twosRankLogo.replace("-", " ")}
                             openDelay={200} closeDelay={100}>
                                 <Image src={`ranked-icons/${twosRankLogo}.png`} alt="2s rank" height={"150px"} />
                             </Tooltip>
-                            <Text color={"gray.700"}>2v2</Text>
+                            <Text color={"gray.700"}>Doubles 2v2</Text>
                         </Flex>
                     </HStack>
                 </VStack>

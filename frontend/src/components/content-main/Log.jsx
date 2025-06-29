@@ -25,7 +25,9 @@ function Log({ dates, selectedDate, setSelectedDate, setSelectedPlaylist, allMat
                     <FilterPlaylistMenu setSelectedPlaylist={setSelectedPlaylist} />
                 </Box>
                 <Box>
-                    <Text color={"gray.700"}>{allMatchesOnDate.length} Matches</Text>
+                    <Text color={"gray.700"}>
+                        {allMatchesOnDate.length} {allMatchesOnDate.length === 1 ? "Match" : "Matches"}
+                    </Text>
                 </Box>
             </HStack>
             <Flex direction={"column"} w={"full"} gap={4}>
