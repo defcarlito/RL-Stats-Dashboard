@@ -5,6 +5,7 @@ import Log from "../components/content-main/Log";
 import { db } from "../components/Firebase";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import DayRankChart from "../components/content-right/DayRankChart";
 
 function Dashboard() {
 
@@ -55,14 +56,15 @@ function Dashboard() {
                 </GridItem>
                 <GridItem borderX={"1px solid"} borderColor={"gray.700"}>
                     <Log 
-                    dates={dates} 
-                    selectedDate={selectedDate}
-                    setSelectedDate={setSelectedDate}
-                    allMatchesOnDate={allMatchesOnDate} 
-                    setSelectedPlaylist={setSelectedPlaylist}/>
+                        dates={dates} 
+                        selectedDate={selectedDate}
+                        setSelectedDate={setSelectedDate}
+                        allMatchesOnDate={allMatchesOnDate} 
+                        setSelectedPlaylist={setSelectedPlaylist}
+                    />
                 </GridItem>
                 <GridItem {...centered}>
-
+                    <DayRankChart allMatchesOnDate={allMatchesOnDate}/>
                 </GridItem>
             </Grid>
         </Box>
