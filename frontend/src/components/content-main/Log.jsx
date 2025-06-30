@@ -35,7 +35,7 @@ function Log({ dates, selectedDate, setSelectedDate, setSelectedPlaylist, allMat
                     <Heading size={"xl"} ml={8} color={"#7E9BB8"}>Match Log</Heading>
                     <Separator orientation={"vertical"} height={6} borderColor={"#30455A"} size={"lg"} borderRadius={"lg"}
                     />
-                    <Text fontSize={"sm"} color={"#7E9BB8"}>{selectedDate}</Text>
+                    <Text fontSize={"sm"} color={"#7E9BB8"}>{formatDate(selectedDate)}</Text>
                 </HStack>
 
                 {allMatchesOnDate.map((matchStats, index) => (
