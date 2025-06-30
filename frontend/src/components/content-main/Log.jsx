@@ -1,4 +1,4 @@
-import { Flex, Heading, HStack, VStack, Text, Box, Presence } from "@chakra-ui/react"
+import { Flex, Heading, HStack, VStack, Text, Box, Presence, Separator } from "@chakra-ui/react"
 import Match from "./match/Match"
 import DateSelector from "./filter/DateSelector";
 import FilterPlaylistMenu from "./filter/FilterPlaylistMenu";
@@ -15,7 +15,6 @@ function Log({ dates, selectedDate, setSelectedDate, setSelectedPlaylist, allMat
 
     return (
         <VStack w={"100%"} minH={"100vh"} px={8} py={4} gap={2}>
-            <Heading size={"4xl"}>Match Logs</Heading>
             <Box>
                 <DateSelector dates={dates} selectedDate={selectedDate} 
                 setSelectedDate={setSelectedDate} formatDate={formatDate} />
@@ -30,10 +29,18 @@ function Log({ dates, selectedDate, setSelectedDate, setSelectedPlaylist, allMat
                     </Text>
                 </Box>
             </HStack>
-            <Flex direction={"column"} w={"full"} gap={4}>
+            <Flex direction={"column"} w={"full"} gap={4} bg={"#212D3B"} borderRadius={"lg"}>
+                <HStack w={"full"} bg={"#2A3A4C"} borderTopRadius={"lg"} textAlign={"flex-start"} py={2}
+                direction={"row"} gap={4}>
+                    <Heading size={"xl"} ml={8} color={"#7E9BB8"}>Match Log</Heading>
+                    <Separator orientation={"vertical"} height={6} borderColor={"#30455A"} size={"lg"} borderRadius={"lg"}
+                    />
+                    <Text fontSize={"sm"} color={"#7E9BB8"}>{selectedDate}</Text>
+                </HStack>
+
                 {allMatchesOnDate.map((matchStats, index) => (
-                    <Presence key={matchStats.StartEpoch} present={true}
-                    animationName={{ _open: "scale-in, fade-in, slide-from-bottom-full" }} animationDuration=".75s"
+                    <Presence key={matchStats.StartEpoch} present={true} px={8}
+                    animationName={{ _open: "scale-in, fade-in, slide-from-bottom" }} animationDuration=".75s"
                     style={{ animationDelay: `${index * 0.25}s`, animationFillMode: "both" }}>
                         <Match key={matchStats.StartEpoch} matchStats={matchStats}/>
                     </Presence>

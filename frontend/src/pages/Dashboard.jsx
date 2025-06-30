@@ -48,7 +48,7 @@ function Dashboard() {
 
     
     return (
-        <Box bg={"gray.900"} color={"white"} minH={"100vh"}>
+        <Box bg={"#1B2531"} color={"white"} minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
                 <GridItem {...centered}>

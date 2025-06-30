@@ -17,7 +17,7 @@ function DayRankChart({ allMatchesOnDate }) {
     useEffect(() => {
         const theData = () => {
             const arr = allMatchesOnDate.map(element => ({
-            MMR: element.LocalMMRBefore,
+            MMR: element.LocalMMRAfter,
             time: element.StartTime
         }))
             return arr.reverse()
@@ -44,7 +44,9 @@ function DayRankChart({ allMatchesOnDate }) {
                 dataKey={chart.key("MMR")}
                 domain={['dataMin - 100', 'dataMax + 100']}
             />
-            <Tooltip content={<Chart.Tooltip />}/>
+            <Tooltip 
+                content={<Chart.Tooltip />}
+            />
             {chart.series.map((item) => (
                 <Area 
                     type="monotone"

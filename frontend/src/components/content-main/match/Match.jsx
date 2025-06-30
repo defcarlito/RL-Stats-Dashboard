@@ -76,9 +76,10 @@ function Match({ matchStats }){
     )
 
     return (
-        <Box border={"1px solid"} borderColor={"gray.700"} color={"white"} p={4} 
+        <Box border={"5px solid"} borderColor={"#2A3A4C"} color={"white"} p={4} 
             w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"}
-            overflow={"hidden"}>
+            overflow={"hidden"} bg={"#233140"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}
+            borderLeftColor={`${resultColor}.300`}>
             <VStack gap={8} w={"100%"}>
                 <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"}>
                     <VStack position={"relative"}>
