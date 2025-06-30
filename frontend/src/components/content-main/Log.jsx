@@ -29,7 +29,7 @@ function Log({ dates, selectedDate, setSelectedDate, setSelectedPlaylist, allMat
                     </Text>
                 </Box>
             </HStack>
-            <Flex direction={"column"} w={"full"} gap={4} bg={"#212D3B"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}>
+            <Flex direction={"column"} w={"full"} gap={4} bg={"#212D3B"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"} pb={8}>
                 <HStack w={"full"} bg={"#2A3A4C"} borderTopRadius={"lg"} textAlign={"flex-start"} py={2}
                 direction={"row"} gap={4}>
                     <Heading size={"xl"} ml={8} color={"#7E9BB8"}>Match Log</Heading>
