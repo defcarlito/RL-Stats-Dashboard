@@ -5,7 +5,8 @@ import Log from "../components/content-main/Log";
 import { db } from "../components/Firebase";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import DayRankChart from "../components/content-right/DayRankChart";
+import DayRankChart from "../components/content-right/charts/DayRankChart";
+import ContentRight from "../components/content-right/ContentRight";
 
 function Dashboard() {
 
@@ -50,7 +51,7 @@ function Dashboard() {
         <Box bgGradient="to-r" gradientFrom="background.base" gradientVia="container.base" gradientTo="background.base" minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
-                <GridItem {...centered}>
+                <GridItem {...centered} border={"1px solid red"}>
                     <CurrentStats dates={dates} />
                 </GridItem>
                 <GridItem>
@@ -62,8 +63,8 @@ function Dashboard() {
                         setSelectedPlaylist={setSelectedPlaylist}
                     />
                 </GridItem>
-                <GridItem {...centered}>
-                    <DayRankChart allMatchesOnDate={allMatchesOnDate}/>
+                <GridItem {...centered} border={"1px solid red"}>
+                    <ContentRight allMatchesOnDate={allMatchesOnDate}/>
                 </GridItem>
             </Grid>
         </Box>

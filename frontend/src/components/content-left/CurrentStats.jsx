@@ -128,7 +128,7 @@ function CurrentStats({ dates }) {
                     >
                         <Heading size={"lg"} color={"text.quiet"}>Current</Heading>
                     </HStack>
-                    <VStack>
+                    <VStack pb={2}>
                         <HStack w={"full"} justifyContent={"space-between"} pl={4}>
                             <Text color={"text.quiet"}>1v1</Text>
                             <Separator orientation={"horizontal"} color={"text.quieter"} border={"2px solid"} borderRadius={"lg"} width={4} ml={2} px={4}/>
