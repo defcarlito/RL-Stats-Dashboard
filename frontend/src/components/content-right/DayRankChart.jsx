@@ -34,7 +34,8 @@ function DayRankChart({ allMatchesOnDate }) {
   })
 
   return (
-        <Chart.Root maxH="sm" chart={chart}>
+        
+        <Chart.Root maxH="2xs" chart={chart}>
         <AreaChart data={chart.data}>
             <CartesianGrid stroke={chart.color("border.muted")} vertical={false} />
             <XAxis 

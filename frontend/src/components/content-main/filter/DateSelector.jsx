@@ -41,7 +41,7 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
     return (
         <VStack bg={"container.base"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}
         alignContent={"center"} justifyContent={"center"} my={4} mx={2}>
-            <HStack w={"full"} bg={"container.soft"} borderTopRadius={"lg"} textAlign={"flex-start"}
+            <HStack w={"full"} bg={"container.soft"} borderTopRadius={"lg"} justifyContent={"center"}
             direction={"row"} gap={4} px={4} py={2}>
                 <Heading size={"lg"} color={"text.quiet"}>Log Date</Heading>
             </HStack>

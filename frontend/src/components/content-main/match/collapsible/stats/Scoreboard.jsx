@@ -12,16 +12,16 @@ function Scoreboard({ matchPlayerInfo }) {
     })
 
     return (
-        <Center w={"full"} border={"1px solid"} borderColor={"gray.700"}>
+        <Center w={"full"} border={"5px solid"} borderColor={"border.soft"} borderRadius={"lg"}>
             <Table.Root>
                 <Table.Header>
                     <Table.Row bg={"transparent"}>
-                        <Table.ColumnHeader textAlign={"center"}>Player</Table.ColumnHeader>
-                        <Table.ColumnHeader textAlign={"center"}>Score</Table.ColumnHeader>
-                        <Table.ColumnHeader textAlign={"center"}>Goals</Table.ColumnHeader>
-                        <Table.ColumnHeader textAlign={"center"}>Assists</Table.ColumnHeader>
-                        <Table.ColumnHeader textAlign={"center"}>Saves</Table.ColumnHeader>
-                        <Table.ColumnHeader textAlign={"center"}>Shots</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Player</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Score</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Goals</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Assists</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Saves</Table.ColumnHeader>
+                        <Table.ColumnHeader textAlign={"center"} color={"text.base"} borderColor={"transparent"}>Shots</Table.ColumnHeader>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
@@ -31,13 +31,13 @@ function Scoreboard({ matchPlayerInfo }) {
                                 ? `${teamColors[player.Team]}/50`
                                 : `${teamColors[player.Team]}/25`
                             }
-                            >
-                            <Table.Cell textAlign={"center"}>{player.Name}</Table.Cell>
-                            <Table.Cell textAlign={"center"}>{player.Score}</Table.Cell>
-                            <Table.Cell textAlign={"center"}>{player.Goals}</Table.Cell>
-                            <Table.Cell textAlign={"center"}>{player.Assists}</Table.Cell>
-                            <Table.Cell textAlign={"center"}>{player.Saves}</Table.Cell>
-                            <Table.Cell textAlign={"center"}>{player.Shots}</Table.Cell>
+                        >
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Name}</Table.Cell>
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Score}</Table.Cell>
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Goals}</Table.Cell>
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Assists}</Table.Cell>
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Saves}</Table.Cell>
+                            <Table.Cell textAlign={"center"} borderColor={"transparent"}>{player.Shots}</Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack, Image, Presence, Text, VStack } from "@chakra-ui/react"
+import { Box, Flex, Heading, HStack, Image, Presence, Separator, Text, VStack } from "@chakra-ui/react"
 import { Tooltip } from "../ui/tooltip"
 import { useEffect, useState, useMemo } from "react"
 import { db } from "../Firebase";
@@ -122,24 +122,30 @@ function CurrentStats({ dates }) {
                     </HStack>
                     <Text color={"text.base/25"}>Last played {lastPlayedText}</Text>
                 </Box>
-                <VStack p={4} border={"1px solid"} borderColor={"gray.700"}>
-                    <Text fontSize={"xl"} color={"gray.700"}>Current rankings</Text>
-                    <HStack>
-                        <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
+                <VStack borderRadius={"lg"} bg={"container.base"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"} minW={300}>
+                    <HStack w={"full"} bg={"container.soft"} justifyContent={"center"} borderTopRadius={"lg"}
+                        direction={"row"} px={4} py={2}
+                    >
+                        <Heading size={"lg"} color={"text.quiet"}>Current</Heading>
+                    </HStack>
+                    <VStack>
+                        <HStack w={"full"} justifyContent={"space-between"} pl={4}>
+                            <Text color={"text.quiet"}>1v1</Text>
+                            <Separator orientation={"horizontal"} color={"text.quieter"} border={"2px solid"} borderRadius={"lg"} width={4} ml={2} px={4}/>
                             <Tooltip showArrow content={onesRankLogo.replace("-", " ")}
                             openDelay={200} closeDelay={100}>
-                                <Image src={`ranked-icons/${onesRankLogo}.png`} alt="1s rank" height={"150px"} />
+                                <Image src={`ranked-icons/${onesRankLogo}.png`} alt="1s rank" height={"75px"} />
                             </Tooltip>
-                            <Text color={"gray.700"}>Duel 1v1</Text>
-                        </Flex>
-                        <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
+                        </HStack>
+                        <HStack w={"full"} justifyContent={"space-between"} pl={4}>
+                            <Text color={"text.quiet"}>2v2</Text>
+                            <Separator orientation={"horizontal"} color={"text.quieter"} border={"2px solid"} borderRadius={"lg"} width={4} ml={2} px={4}/>
                             <Tooltip showArrow content={twosRankLogo.replace("-", " ")}
                             openDelay={200} closeDelay={100}>
-                                <Image src={`ranked-icons/${twosRankLogo}.png`} alt="2s rank" height={"150px"} />
+                                <Image src={`ranked-icons/${twosRankLogo}.png`} alt="2s rank" height={"75px"} />
                             </Tooltip>
-                            <Text color={"gray.700"}>Doubles 2v2</Text>
-                        </Flex>
-                    </HStack>
+                        </HStack>
+                    </VStack>
                 </VStack>
             </VStack>
         </Presence>

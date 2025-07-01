@@ -47,7 +47,7 @@ function Dashboard() {
     }, [])
     
     return (
-        <Box bg={"background.base"} minH={"100vh"}>
+        <Box bgGradient="to-r" gradientFrom="background.base" gradientVia="container.base" gradientTo="background.base" minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
                 <GridItem {...centered}>
