@@ -45,16 +45,15 @@ function Dashboard() {
         }
         fetchAvaliableDates()
     }, [])
-
     
     return (
-        <Box bg={"#1B2531"} color={"white"} minH={"100vh"}>
+        <Box bg={"background.base"} minH={"100vh"}>
             <Navbar />
             <Grid templateColumns={"1fr 2fr 1fr"}>
                 <GridItem {...centered}>
                     <CurrentStats dates={dates} />
                 </GridItem>
-                <GridItem borderX={"1px solid"} borderColor={"gray.700"}>
+                <GridItem>
                     <Log 
                         dates={dates} 
                         selectedDate={selectedDate}

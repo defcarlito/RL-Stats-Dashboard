@@ -1,4 +1,4 @@
-import { Button, Popover, HStack, Box } from "@chakra-ui/react";
+import { Button, Popover, HStack, VStack, Box, Separator, Heading, Flex } from "@chakra-ui/react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "../../../styles/datepicker.css";
@@ -39,54 +39,63 @@ function DateSelector({ dates, selectedDate, setSelectedDate, formatDate }) {
     
 
     return (
-        <HStack p={4} border={"1px solid"} borderColor={"gray.700"} alignContent={"center"} justifyContent={"center"} my={4}>
-            {recent_three_dates.map((date, index) => (
-                    <Button size={"sm"} variant={"plain"} key={index} 
-                    onClick={() => setSelectedDate(date)} fontSize={"lg"}
-                    color={ selectedDate === date ? "gray.400" : "gray.700"}
-                    _hover={{ color: selectedDate !== date ? "gray.500" : undefined }}>
-                        {date === todayStr ? 
-                            "Today" : 
-                            (date === yesterdayStr ? 
-                                "Yesterday" : 
-                                formatDate(date)
-                            )
-                        }
-                    </Button>
-            ))}
-                <Popover.Root>
-                    <Popover.Trigger asChild>
-                        <Button size={"sm"} fontSize={"lg"} variant={"plain"} color={"blue.200/50"}
-                        _hover={{ color: "blue.200" }}>
-                            More
+        <VStack bg={"container.base"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}
+        alignContent={"center"} justifyContent={"center"} my={4} mx={2}>
+            <HStack w={"full"} bg={"container.soft"} borderTopRadius={"lg"} textAlign={"flex-start"}
+            direction={"row"} gap={4} px={4} py={2}>
+                <Heading size={"lg"} color={"text.quiet"}>Log Date</Heading>
+            </HStack>
+            <HStack gap={2} p={4} alignContent={"center"} justifyContent={"center"}>     
+                {recent_three_dates.map((date, index) => (
+                        <Button size={"sm"} variant={"solid"} key={index}
+                        onClick={() => setSelectedDate(date)} fontSize={"lg"}
+                        color={ selectedDate === date ? "border.soft" : "text.quiet" }
+                        bg={ selectedDate === date ? "text.quiet" : "border.soft" }
+                        _hover={{ bg: selectedDate !== date ? "text.quieter" : undefined }}>
+                            {date === todayStr ? 
+                                "Today" : 
+                                (date === yesterdayStr ? 
+                                    "Yesterday" : 
+                                    formatDate(date)
+                                )
+                            }
                         </Button>
-                    </Popover.Trigger>
-                    <Popover.Positioner>
-                        <Popover.Content css={{ "--popover-bg": "#18181b" }}>
-                        <Popover.CloseTrigger />
-                        <Popover.Arrow>
-                            <Popover.ArrowTip />
-                        </Popover.Arrow> 
-                        <Popover.Body>
-                            <DayPicker
-                                animate
-                                mode="single"
-                                navLayout="around"
-                                selected={selected}
-                                onSelect={setSelected}
-                                modifiers={{ available: availableDates }}
-                                modifiersStyles={{
-                                    available: {
+                ))} 
+                    <Separator orientation={"vertical"} height={8} borderColor={"card.base"} size={"lg"} borderRadius={"lg"} mx={2}/>
+                    <Popover.Root>
+                        <Popover.Trigger asChild>
+                            <Button size={"sm"} fontSize={"lg"} variant={"plain"} color={"text.quieter"}
+                            _hover={{ color: "text.quiet" }} p={0}>
+                                More
+                            </Button>
+                        </Popover.Trigger>
+                        <Popover.Positioner>
+                            <Popover.Content css={{ "--popover-bg": "#1B2531" }}>
+                            <Popover.CloseTrigger />
+                            <Popover.Arrow>
+                                <Popover.ArrowTip />
+                            </Popover.Arrow> 
+                            <Popover.Body>
+                                <DayPicker
+                                    animate
+                                    mode="single"
+                                    navLayout="around"
+                                    selected={selected}
+                                    onSelect={setSelected}
+                                    modifiers={{ available: availableDates }}
+                                    modifiersStyles={{
+                                        available: {
 
-                                    },
-                                }}
-                                disabled={(day) => !availableDates.some(d => isSameDay(d, day))}
-                            />
-                        </Popover.Body>
-                        </Popover.Content>
-                    </Popover.Positioner>
-                </Popover.Root>
-        </HStack>
+                                        },
+                                    }}
+                                    disabled={(day) => !availableDates.some(d => isSameDay(d, day))}
+                                />
+                            </Popover.Body>
+                            </Popover.Content>
+                        </Popover.Positioner>
+                    </Popover.Root>
+            </HStack>
+        </VStack>
     )
 }
 

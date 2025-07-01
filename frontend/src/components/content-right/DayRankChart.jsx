@@ -47,8 +47,9 @@ function DayRankChart({ allMatchesOnDate }) {
             <Tooltip 
                 content={<Chart.Tooltip />}
             />
-            {chart.series.map((item) => (
+            {chart.series.map((item, index) => (
                 <Area 
+                    key={index}
                     type="monotone"
                     dataKey={chart.key(item.name)}
                     fill={chart.color(item.color)}

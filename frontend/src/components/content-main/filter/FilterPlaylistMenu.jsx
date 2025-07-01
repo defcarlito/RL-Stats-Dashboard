@@ -1,6 +1,5 @@
-import { Menu, Button, Portal } from "@chakra-ui/react"
+import { Menu, Portal, HStack } from "@chakra-ui/react"
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 function FilterPlaylistMenu({ setSelectedPlaylist }){
@@ -10,9 +9,9 @@ function FilterPlaylistMenu({ setSelectedPlaylist }){
     return (
         <Menu.Root>
             <Menu.Trigger asChild>
-                <Button variant={"plain"} size={"sm"} fontSize={"sm"} color={"white"}>
-                    <GiHamburgerMenu />Filter <MdKeyboardArrowRight /> <u>{formatPlaylist}</u>
-                </Button>
+                <HStack variant={"plain"} fontSize={"2xl"}>
+                    Playlist<MdKeyboardArrowRight /> {formatPlaylist}
+                </HStack>
             </Menu.Trigger>
             <Portal>
                 <Menu.Positioner>

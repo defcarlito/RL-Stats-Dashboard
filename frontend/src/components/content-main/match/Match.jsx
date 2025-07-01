@@ -1,5 +1,6 @@
 import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex } from "@chakra-ui/react"
 import MatchCollapsible from "./collapsible/MatchCollapsible"
+import { Tooltip } from "recharts"
 
 function hasLocalPlayerWon(stats, localTeam, opponentTeam){
     let winner = -1
@@ -64,21 +65,20 @@ function Match({ matchStats }){
 
     const mmrStats = (
         <Stat.Root>
-            <Stat.Label>MMR</Stat.Label>
-            <Stat.ValueText>
-                <FormatNumber value={mmrAfter}></FormatNumber>
-                <Badge colorPalette={indicatorColor} variant={"plain"} size={"md"} px={0} gap={0}>
-                    {indicator} {mmrDifference !== 0 && Math.abs(mmrDifference)}
-                </Badge>
-            </Stat.ValueText>
-            <Stat.HelpText>Prev: {mmrBefore}</Stat.HelpText>
+                <Stat.ValueText>
+                    <FormatNumber value={mmrAfter}></FormatNumber>
+                    <Badge colorPalette={indicatorColor} variant={"plain"} size={"md"} px={0} gap={0}>
+                        {indicator} {mmrDifference !== 0 && Math.abs(mmrDifference)}
+                    </Badge>
+                </Stat.ValueText>
+            <Stat.HelpText color={"text.quieter"}>Prev: {mmrBefore}</Stat.HelpText>
         </Stat.Root>
     )
 
     return (
-        <Box border={"5px solid"} borderColor={"#2A3A4C"} color={"white"} p={4} 
+        <Box border={"5px solid"} borderColor={"border.soft"} p={4} 
             w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"}
-            overflow={"hidden"} bg={"#233140"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}
+            overflow={"hidden"} bg={"card.base"} borderRadius={"lg"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}
             borderLeftColor={`${resultColor}.300`}>
             <VStack gap={8} w={"100%"}>
                 <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"}>
@@ -89,16 +89,16 @@ function Match({ matchStats }){
                         </HStack>
                         {matchStats.bForfeit === 1 && forfeitBadge}
                     </VStack>
-                    <Text color={"gray.700"}>{time()}</Text>
+                    <Text color={"text.quieter"}>{time()}</Text>
                 </HStack>
                 <Flex w={"100%"} align={"center"} position={"relative"}>
-                    <Heading mx={"auto"}>vs. {opponentNames}</Heading>
+                    <Heading mx={"auto"} color={"text.quieter"}>vs. {opponentNames}</Heading>
                     <Box position={"absolute"} right={0} size={"sm"}>{mmrStats}</Box>
                 </Flex>
                 <VStack w={"100%"}>
                     <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
                         <MatchCollapsible matchStats={matchStats} />
-                        <Text color={"gray.700"} textStyle={"xs"} position={"absolute"} top={3} right={0}>
+                        <Text color={"text.quieter"} textStyle={"xs"} position={"absolute"} top={3} right={0}>
                             {matchStats.Playlist === 10 ? "1v1" : "2v2"}
                         </Text>
                     </HStack>

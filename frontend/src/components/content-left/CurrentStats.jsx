@@ -120,7 +120,7 @@ function CurrentStats({ dates }) {
                         <Image bg="transparent" height="50px" src="epic-games-logo.svg" />
                         <Heading size={"4xl"}>BrickBoned</Heading>
                     </HStack>
-                    <Text color={"gray.500"}>Last played {lastPlayedText}</Text>
+                    <Text color={"text.base/25"}>Last played {lastPlayedText}</Text>
                 </Box>
                 <VStack p={4} border={"1px solid"} borderColor={"gray.700"}>
                     <Text fontSize={"xl"} color={"gray.700"}>Current rankings</Text>
