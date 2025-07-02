@@ -5,8 +5,6 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  Legend,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
@@ -16,11 +14,21 @@ function DayRankChart({ allMatchesOnDate }) {
 
     const [data, setData] = useState([])
 
+    const FormatTime = (time) => {
+        const hour = parseInt(time.split("-")[0])
+        const minute = time.split("-")[1]
+        const symbol = hour < 12 ? "AM" : "PM"
+
+        const adjustHour = (hour === 0 ? 12 : (hour < 13 ? hour : hour - 12 ))
+
+        return `${adjustHour}:${minute} ${symbol}`
+    }
+
     useEffect(() => {
         const theData = () => {
             const arr = allMatchesOnDate.map(element => ({
             MMR: element.LocalMMRAfter,
-            time: element.StartTime
+            time: FormatTime(element.StartTime)
         }))
             return arr.reverse()
         }
@@ -31,9 +39,23 @@ function DayRankChart({ allMatchesOnDate }) {
     const chart = useChart({
     data: data,
     series: [
-      { name: "MMR", color: "text.quiet" }
+      { name: "MMR", color: "text.base" }
     ],
   })
+
+    const gradientOffset = () => {
+        if (data.length === 0) return 0.5;
+        const base = data[0].MMR;
+        const mmrValues = data.map(d => d.MMR);
+        const max = Math.max(...mmrValues);
+        const min = Math.min(...mmrValues);
+
+        if (max === min) return 0.5;
+
+        return 1 - (base - min) / (max - min);
+    }
+
+    const offset = gradientOffset()
 
   return (
         <Chart.Root chart={chart} h={250} pr={10} pt={6}>
@@ -46,23 +68,29 @@ function DayRankChart({ allMatchesOnDate }) {
                 />
                 <YAxis 
                     dataKey={chart.key("MMR")}
-                    domain={['dataMin - 20', 'dataMax + 20']}
+                    domain={['dataMin - 25', 'dataMax + 25']}
                     axisLine={false}
                     tickLine={false}
                 />
                 <Tooltip 
                     content={<Chart.Tooltip />}
                 />
-                {chart.series.map((item, index) => (
-                        <Area
-                            baseValue={data.length !== 0 && data[0]["MMR"]} 
-                            key={index}
-                            type="natural"
-                            dataKey={chart.key(item.name)}
-                            fill={chart.color(item.color)}
-                            stroke={chart.color("text.base")}
-                        /> 
-                ))}
+                <defs>
+                    <Chart.Gradient
+                        id="uv-gradient"
+                        stops={[
+                        { offset, color: "green.300", opacity: 0.4 },
+                        { offset, color: "red.300", opacity: 0.4 },
+                        ]}
+                    />
+                </defs>
+                <Area
+                    baseValue={data.length !== 0 && data[0]["MMR"]}
+                    type="natural"
+                    dataKey={chart.key("MMR")}
+                    stroke={chart.color("text.base")}
+                    fill="url(#uv-gradient)"
+                /> 
             </AreaChart>
         </Chart.Root>
     )
