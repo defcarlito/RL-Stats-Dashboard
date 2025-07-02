@@ -1,6 +1,6 @@
-import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex } from "@chakra-ui/react"
+import { Box, HStack, Heading, Text, VStack, Stat, FormatNumber, Badge, Flex, IconButton } from "@chakra-ui/react"
 import MatchCollapsible from "./collapsible/MatchCollapsible"
-import { Tooltip } from "recharts"
+import { Clapperboard } from 'lucide-react';
 
 function hasLocalPlayerWon(stats, localTeam, opponentTeam){
     let winner = -1
@@ -96,11 +96,13 @@ function Match({ matchStats }){
                     <Box position={"absolute"} right={0} size={"sm"}>{mmrStats}</Box>
                 </Flex>
                 <VStack w={"100%"}>
-                    <HStack w={"100%"} justifyContent={"space-between"} alignItems={"center"} position={"relative"}>
+                    <HStack justifyContent={"flex-start"} alignSelf={"flex-start"} w={"100%"} position={"relative"}>
                         <MatchCollapsible matchStats={matchStats} />
-                        <Text color={"text.quieter"} textStyle={"xs"} position={"absolute"} top={3} right={0}>
-                            {matchStats.Playlist === 10 ? "1v1" : "2v2"}
-                        </Text>
+                        <IconButton size={"sm"} variant={"outline"} borderColor={"border.soft"}
+                            background={"container.soft"} _hover={{ bg: "text.quieter" }} position={"absolute"} left={11} top={0}
+                            >
+                            <Clapperboard />
+                        </IconButton>
                     </HStack>
                 </VStack>
             </VStack>

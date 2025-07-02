@@ -1,4 +1,4 @@
-import { Box, Collapsible, Flex, Icon } from "@chakra-ui/react"
+import { Box, Collapsible, Flex, Icon, IconButton } from "@chakra-ui/react"
 import { useState } from "react"
 import { SlArrowRight, SlArrowDown } from "react-icons/sl"
 import Scoreboard from "./stats/Scoreboard"
@@ -21,7 +21,11 @@ function MatchCollapsible({ matchStats }) {
     return (
         <Collapsible.Root open={isOpen} w={"full"}>
             <Collapsible.Trigger onClick={()=>{setIsOpen(!isOpen)}}>
-                <Icon>{icon}</Icon>
+                <IconButton size={"sm"} variant={"outline"} borderColor={"border.soft"}
+                    background={"container.soft"} _hover={{ bg: "text.quieter" }}
+                >
+                    {icon}
+                </IconButton>
             </Collapsible.Trigger>
             <Collapsible.Content>
                 <Box>
